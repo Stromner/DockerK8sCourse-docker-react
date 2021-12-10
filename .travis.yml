@@ -8,3 +8,15 @@ before_install:
 
 script:
         - docker run -e CI=true stromner/docker-react npm run test
+
+deploy:
+        provider: elasticbeanstalk
+        region: "eu-west-1"
+        app: "DockerK8sCourse-docker-react"
+        env: "Dockerk8scoursedockerreact-env"
+        bucket_name: "elasticbeanstalk-eu-west-1-262437082742" # Created by AWS when we created the environment
+        bucket_path: "DockerK8sCourse-docker-react" # Same as app
+        on:
+                branch: master
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY
